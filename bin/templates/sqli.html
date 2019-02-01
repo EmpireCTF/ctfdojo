@@ -1,0 +1,14 @@
+<h1>ctf dojo: SQL injection: ::name::</h1>
+<p>Initial setup:</p>
+<div class="code"><pre>::setup::</pre></div>
+<p>Query:</p>
+<div class="code"><pre>::foreach query::::if (type == "input-any")::</pre><form method="post"><input type="text" name="query"></form><pre>::end::::if (type == "input-filter")::</pre><form method="post"><div class="filter">In the code:<br><pre>::filters::</pre></div><input type="text" name="query"></form><pre>::end::::if (type == "sql")::::data::::end::::end::</pre></div>
+::if resources::
+<p>Resources:</p>
+<ul>
+	::foreach resources::<li><a href="::link::" target="_blank">::text::</a></li>::end::
+</ul>
+::end::::if script::
+<p>Script:</p>
+<div class="code"><pre>::script::</pre></div>
+::end::

@@ -1,0 +1,15 @@
+<h1>ctf dojo: SQL injection: ::name::</h1>
+::if query::
+	<p>Query:</p>
+	<div class="code"><pre>::query::</pre></div>
+::end::
+::if error::
+	<p>Error:</p>
+	<div class="code"><pre>::error::</pre></div>
+::end::
+::if results::
+	<p>Results:</p>
+	<div class="code"><pre>::results::</pre></div>
+::else::
+	<p>(no results)</p>
+::end::

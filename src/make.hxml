@@ -1,0 +1,4 @@
+-lib hxnodejs
+-lib hxsocketio
+-main Main
+-js ../bin/server.js

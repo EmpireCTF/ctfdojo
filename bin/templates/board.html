@@ -1,0 +1,11 @@
+<script type="text/javascript" src="http://localhost:3451/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+window.onload = () => {
+	let socket = io("http://localhost:3451/?admin=swungfu");
+	socket.on("board", board => {
+		document.getElementById("board").innerHTML = board.map(e => `<li>${e.name} (${e.count})</li>`).join("");
+	});
+};
+</script>
+<h1>ctf dojo: leaderboard</h1>
+<ol id="board"></ol>

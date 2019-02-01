@@ -1,0 +1,36 @@
+<script type="text/javascript" src="http://localhost:3451/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+window.onload = () => {
+	let socket = io("http://localhost:3451/?admin=swungfu");
+	socket.on("clients", clients => {
+		document.getElementById("clients").innerHTML = clients.map(e => `<li>${e.flag ? "F" : "-"} ${e.name}: <div class="last-submission">${e.last}</div></li>`).join("");
+		document.getElementById("client-count").innerText = clients.length;
+	});
+	for (let node of document.querySelectorAll(".js-chal")) {
+		node.addEventListener("click", e => {
+			let id = e.target.getAttribute("data-challenge");
+			let data = new URLSearchParams(`challengeId=${id}`);
+			fetch("http://localhost:3450/challenge", {
+				 method: "POST"
+				,credentials: "include"
+				,body: data
+			}).then(res => res.text())
+			.then(text => {
+				if (text === "ok") {
+					document.getElementById("current").innerText = id === "none" ? "(none)" : id;
+				}
+			});
+		});
+	}
+};
+</script>
+<h1>ctf dojo: control panel</h1>
+<p>Current challenge:</p>
+<div class="code" id="current">::current::</div>
+<p>Clients (<span id="client-count">0</span>):</p>
+<ul id="clients"></ul>
+<p>Challenges:</p>
+<ul>
+	<li><a class="js-chal" data-challenge="none">Deactivate</a></li>
+	::foreach challenges::<li><a class="js-chal" data-challenge="::challengeId::">::challengeId::</a></li>::end::
+</ul>
