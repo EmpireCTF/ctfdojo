@@ -23,6 +23,7 @@ class Main {
       = (ChallengeMacro.category("sqli"):Array<Challenge>)
       .concat(ChallengeMacro.category("php"))
       .concat(ChallengeMacro.category("js"))
+      .concat(ChallengeMacro.category("crypto"))
       .filter(c -> c.enabled);
     switch (js.Node.process.argv) {
       case [_, _] | [_, _, "-q"]:
@@ -135,7 +136,6 @@ class Main {
             js.Node.process.exit();
           });
       });
-    //for (c in challenges) if (c.challengeId == "js-08-anti-re") runChallenge(c);
   }
 }
 

@@ -4,7 +4,7 @@ This is a set of minimal CTF challenges in various categories with a tiny challe
 
 ## Dependencies ##
 
- - [`haxe`](https://haxe.org/)
+ - [`haxe 4.0.0-rc.1`](https://haxe.org/download/version/4.0.0-rc.1/)
  - [`node`](https://nodejs.org/), [`npm`](https://www.npmjs.com/)
  - `sox` (for playing sounds)
 
