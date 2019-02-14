@@ -8,7 +8,7 @@ class HTTP {
   }
   
   public var server:{close:(Void->Void)->Void};
-  var native:ExpressApp;
+  public var native:ExpressApp;
   var templates:Map<String, haxe.Template>;
   
   public function new(setup:ExpressApp->Templater->Void, ?options:{
@@ -111,6 +111,7 @@ extern class ExpressRequest {
   var body:Dynamic;
   var cookies:Dynamic;
   var params:Dynamic;
+  var query:Dynamic;
   var url:String;
 }
 

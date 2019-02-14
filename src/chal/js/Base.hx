@@ -14,21 +14,25 @@ class Base extends Challenge {
     super("js", name);
   }
   
+  function baseHTTPSetup(app:chal.HTTP.ExpressApp, tmp:chal.HTTP.Templater):Void {
+    app.post("/", (req, res, next) -> {
+        var body = (req.body:haxe.DynamicAccess<String>);
+        if (body.exists("flag")) checkFlag(req, body.get("flag"));
+        next();
+      });
+    app.all("/", (req, res) -> {
+        res.send(tmp.show("js", {
+             name: name
+            ,script: mainJS.replace("&", "&amp;").replace("<", "&lt;")
+            ,content: mainHTML
+            ,resources: resources
+          }, {scripts: [mainJS]}));
+      });
+  }
+  
   override public function up():Void {
     http = new HTTP((app, tmp) -> {
-        app.post("/", (req, res, next) -> {
-            var body = (req.body:haxe.DynamicAccess<String>);
-            if (body.exists("flag")) checkFlag(req, body.get("flag"));
-            next();
-          });
-        app.all("/", (req, res) -> {
-            res.send(tmp.show("js", {
-                 name: name
-                ,script: mainJS.replace("&", "&amp;").replace("<", "&lt;")
-                ,content: mainHTML
-                ,resources: resources
-              }, {scripts: [mainJS]}));
-          });
+        baseHTTPSetup(app, tmp);
       });
   }
 }

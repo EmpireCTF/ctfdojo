@@ -29,7 +29,11 @@ class Main {
       case [_, _] | [_, _, "-q"]:
       quiet = (js.Node.process.argv[2] == "-q");
       runControl();
-      case _: js.Node.console.log("usage: node server.js [-q]");
+      case [_, _, chall] | [_, _, "-q", chall]:
+      quiet = (js.Node.process.argv.length == 4);
+      runControl();
+      for (c in challenges) if (c.challengeId == chall) runChallenge(c);
+      case _: js.Node.console.log("usage: node server.js [-q] [challenge]");
     }
   }
   
